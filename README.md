@@ -5,16 +5,14 @@ Sozu is a very simple asynchroneous calls joining library.
 
 ## Example
 
-	myResult = new sozu(this);
-
-	myResult.
+	myResult = new sozu(this).
 
 	needs(setTimeout,function(){
-      console.log "your result is ready";
+      console.log('ready');
     }, 30).
 
     then(function(){
-      console.log('Thanks, I got my result after your result.');
+      console.log('finished');
     });
 
 ## About the name

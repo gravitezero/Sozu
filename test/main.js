@@ -5,9 +5,7 @@ var mocha           = require('mocha'),
 describe('Sozu', function() {
   it('should be executed after one needs', function(done) {
     var proof = false;
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
       proof = true
@@ -21,9 +19,7 @@ describe('Sozu', function() {
 
   it('should be executed after multiple needs', function(done) {
     var proof = 0;
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
       proof += 1;
@@ -46,9 +42,7 @@ describe('Sozu', function() {
   it('should receive results of callbacks', function(done) {
     var proof = 0;
     var args = ['tartiflette', 'raclette', 'flammenküche'];
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
       return args[0];
@@ -82,9 +76,7 @@ describe('Sozu', function() {
   it('should receive one argument of callbacks', function(done) {
     var proof = 0;
     var args = ['tartiflette', 'raclette', 'flammenküche'];
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
     }, 20, args[0]).
@@ -111,9 +103,7 @@ describe('Sozu', function() {
   it('should receive multiple arguments of callbacks', function(done) {
     var proof = 0;
     var args = ['tartiflette', 'raclette', 'flammenküche', 'panini', 'kebab', 'tacos'];
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
     }, 20, args[0], args[1]).
@@ -142,9 +132,7 @@ describe('Sozu', function() {
   it('should increase needs on the fly', function(done) {
     var proof = 0;
     var args = ['tartiflette', 'raclette', 'flammenküche', 'panini', 'kebab', 'tacos'];
-    var test = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
       test.needs(setTimeout,function(){
@@ -188,7 +176,9 @@ describe('Sozu', function() {
       proof.should.equal(1);
     });
 
-    test2.then(function(){
+    test2.
+
+    then(function(){
       for(var index in arguments){
         for(var arg in args) {
           if(arguments[index][0][0] === args[arg])

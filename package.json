@@ -1,7 +1,7 @@
 {
   "name": "sozu",
   "version": "0.1.0",
-  "description": "Simple asynchroneous function joining.",
+  "description": "Simple asynchroneous call joining.",
   "main": "lib/main.js",
   "directories": {
     "test": "test"
