@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gravitezero/sozu.git"
+    "url": "git://github.com/gravitezero/Sozu.git"
   },
   "author": "Etienne Brodu",
   "license": "BSD",
