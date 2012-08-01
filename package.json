@@ -1,0 +1,22 @@
+{
+  "name": "sozu",
+  "version": "0.1.0",
+  "description": "Simple asynchroneous function joining.",
+  "main": "lib/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.js --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gravitezero/sozu.git"
+  },
+  "author": "Etienne Brodu",
+  "license": "BSD",
+ "devDependencies": {
+   "mocha": "",
+   "should": ""
+ }
+}
