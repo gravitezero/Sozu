@@ -156,14 +156,11 @@ describe('Sozu', function() {
   it('should be combined with other joining points', function(done) {
     var proof = 0;
     var args = ['tartiflette', 'raclette', 'flammenküche', 'panini', 'kebab', 'tacos'];
-    var test = new sozu(this);
-    var test2 = new sozu(this);
-
-    test.
+    var test = new sozu(this).
 
     needs(setTimeout,function(){
-      test2.needs(setTimeout,function(){
-      }, 10, args[1]);
+        test2.needs(setTimeout,function(){
+      }, 30, args[1]);
     }, 10, args[0]).
 
     then(function(){
@@ -176,7 +173,12 @@ describe('Sozu', function() {
       proof.should.equal(1);
     });
 
-    test2.
+    var test2 = new sozu(this).
+
+    wait(test).
+
+    needs(setTimeout,function(){
+    }, 10, args[1]).
 
     then(function(){
       for(var index in arguments){
@@ -185,7 +187,7 @@ describe('Sozu', function() {
             proof += 1;
         }
       }
-      proof.should.equal(2);
+      proof.should.equal(3);
       done();
     });
 
