@@ -17,6 +17,25 @@ describe('Sozu', function() {
     });      
   });
 
+  it('should be executed after one synchrone needs', function(done) {
+    var proof = false;
+    var fn = function(callback, msg){
+      callback(msg);
+    };
+
+    var test = new sozu(this).
+
+    needs(fn,function(msg){
+      proof = true;
+      return msg;
+    }, 'hot dog').
+
+    then(function(results){
+      proof.should.equal(true);
+      done();
+    });      
+  });  
+
   it('should be executed after multiple needs', function(done) {
     var proof = 0;
     var test = new sozu(this).
@@ -160,14 +179,15 @@ describe('Sozu', function() {
 
     needs(setTimeout,function(){
         test2.needs(setTimeout,function(){
-      }, 30, args[1]);
-    }, 10, args[0]).
+      }, 10, args[1]);
+    }, 30, args[0]).
 
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-          if(arguments[index][0][0] === args[arg])
+          if(arguments[index][0][0] === args[arg]) {
             proof += 1;
+          }
         }
       }
       proof.should.equal(1);
@@ -183,13 +203,14 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-          if(arguments[index][0][0] === args[arg])
+          if(arguments[index][0][0] === args[arg]) {
             proof += 1;
+          }
+
         }
       }
       proof.should.equal(3);
       done();
     });
-
   });
 });
