@@ -19,6 +19,29 @@ describe('Sozu', function() {
 
   it('should be executed after one synchrone needs', function(done) {
     var proof = false;
+    var test = new sozu(this).
+
+    needs(function(){
+      proof = true
+    }).
+
+    then(function(results){
+      proof.should.equal(true);
+      done();
+    });      
+  });
+
+  it('should`nt need needs', function(done) {
+    var proof = false;
+    var test = new sozu(this).
+
+    then(function(){
+      done();
+    });
+  });
+
+  it('should be executed after one synchrone needs', function(done) {
+    var proof = false;
     var fn = function(callback, msg){
       callback(msg);
     };
@@ -78,14 +101,11 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-                  //cb index,  results
-          if(arguments[index] [1] === args[arg])
+                  //cb index, results
+          if(arguments[index].results === args[arg])
             proof += 1;
         }
       }
-
-      // TODO this :
-      //arguments.should.include()
 
       proof.should.equal(3);
       done();
@@ -109,8 +129,8 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-                  //cb index, args, first argument
-          if(arguments[index] [0]   [0] === args[arg])
+                  //cb index, arguments,first argument
+          if(arguments[index].arguments[0] === args[arg])
             proof += 1;
         }
       }
@@ -134,11 +154,10 @@ describe('Sozu', function() {
     }, 10, args[4], args[5]).
 
     then(function(){
-      //console.log(arguments);
       for(var index in arguments){
-        for(var arg_index in arguments[index]) {
+        for(var arg_index in arguments[index].arguments) {
           for(var arg in args) {
-            if(arguments[index][0][arg_index] === args[arg])
+            if(arguments[index].arguments[arg_index] === args[arg])
               proof += 1;
           }
         }
@@ -163,7 +182,7 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-          if(arguments[index][0][0] === args[arg])
+          if(arguments[index].arguments[0] === args[arg])
             proof += 1;
         }
       }
@@ -185,7 +204,7 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-          if(arguments[index][0][0] === args[arg]) {
+          if(arguments[index].arguments[0] === args[arg]) {
             proof += 1;
           }
         }
@@ -203,7 +222,7 @@ describe('Sozu', function() {
     then(function(){
       for(var index in arguments){
         for(var arg in args) {
-          if(arguments[index][0][0] === args[arg]) {
+          if(arguments[index].arguments[0] === args[arg]) {
             proof += 1;
           }
 
@@ -213,4 +232,28 @@ describe('Sozu', function() {
       done();
     });
   });
+
+  it('should be able to iterate a needs over an array', function(done) {
+    var proof = 0;
+    var args = ['tartiflette', 'raclette', 'flammenküche', 'panini', 'kebab', 'tacos'];
+    var test = new sozu(this).
+
+    needsEach(args,setTimeout,function(arg){
+      var fn = function(){
+        return arg;
+      };
+      return [fn, 10];
+    }).
+
+    then(function(){
+      for(var index in arguments){
+        for(var arg in args) {
+          if(arguments[index].results === args[arg])
+            proof += 1;
+        }
+      }
+      proof.should.equal(6);
+      done();
+    });
+  });  
 });
